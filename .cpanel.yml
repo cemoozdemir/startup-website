@@ -1,6 +1,7 @@
 ---
 deployment:
   tasks:
+    - export SRC=/home/medinste/repositories/startup-website/dist
     - export DEPLOYPATH=/home/medinste/public_html/app/
     - /bin/mkdir -p "$DEPLOYPATH"
-    - if [ -d dist ]; then /bin/cp -R dist/* "$DEPLOYPATH"; else echo "dist yok, build sonra kopyalanacak."; fi
+    - if command -v rsync >/dev/null 2>&1; then /usr/bin/rsync -a --delete "$SRC"/ "$DEPLOYPATH"; else /bin/rm -rf "$DEPLOYPATH"/*; /bin/cp -R "$SRC"/* "$DEPLOYPATH"; fi
