@@ -3,4 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/medinste/public_html/app/
     - /bin/mkdir -p "$DEPLOYPATH"
-    - /bin/cp -R dist/* "$DEPLOYPATH"
+    - if [ -d dist ]; then /bin/cp -R dist/* "$DEPLOYPATH"; else echo "dist yok, build sonra kopyalanacak."; fi
